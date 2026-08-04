@@ -3,10 +3,14 @@ $(document).ready(function(){
 
 
 /* Scroll hire me button to contact page */
-	$('.hire-me').click(function(){
-		    $('html, body').animate({
-        		scrollTop: $( $(this).attr('href') ).offset().top
-    		}, 500);
+	$('.hire-me').on('click', function(e){
+        var target = $(this).attr('href');
+        var $target = $(target);
+        if ($target.length) {
+            $('html, body').stop().animate({
+                scrollTop: $target.offset().top - 50
+            }, 750);
+        }
     	return false;
 	});
 
@@ -17,18 +21,19 @@ $(document).ready(function(){
         $(this).parent('li').addClass('active')
     })
 
-/* portfolio mixitup */
-
+/* portfolio mixitup - DISABLED as section was removed
 	$(window).load(function(){
     var $container = $('.grid-wrapper');
-    $container.isotope({
-        filter: '*',
-        animationOptions: {
-            duration: 750,
-            easing: 'linear',
-            queue: false
-        }
-    });
+    if ($container.length) {
+        $container.isotope({
+            filter: '*',
+            animationOptions: {
+                duration: 750,
+                easing: 'linear',
+                queue: false
+            }
+        });
+    }
  
     $('.grid-controls li a').click(function(){
         $('.grid-controls .current').removeClass('current');
@@ -46,32 +51,46 @@ $(document).ready(function(){
          return false;
     });
 });
+*/
 
-
-/* Magnific Popup */
-$('.grid-wrapper').magnificPopup({
+/* Magnific Popup - DISABLED as section was removed
+if ($('.grid-wrapper').length) {
+    $('.grid-wrapper').magnificPopup({
 		  delegate: 'a', 
 		  type: 'image',
 		  gallery:{
 			enabled:true
 		  }
 		});
+}
+*/
 
 
+/* Sticky menu - DISABLED in favor of Bootstrap fixed-top
+// $(".navbar").sticky({topSpacing: 0});
+*/
 
-/* Sticky menu */
-$(".navbar").sticky({topSpacing: 0});
+/* Smooth Scroll and Scroll Spy Replacement */
+    $('#main-menu a').on('click', function(e) {
+        var target = $(this).attr('href');
+        var $target = $(target);
 
+        if ($target.length) {
+            e.preventDefault();
 
-/* Scroll spy and scroll filter */
-    $('#main-menu').onePageNav({
-        currentClass: "active",
-        changeHash: false,
-        scrollThreshold: 0.5,
-        scrollSpeed: 750,
-        filter: "",
-        easing: "swing"	
-     });
+            // Highlight active menu item
+            $('#main-menu li').removeClass('active');
+            $(this).closest('li').addClass('active');
+
+            // Auto-collapse mobile menu
+            $(".navbar-collapse").collapse('hide');
+
+            // Scroll to target
+            $('html, body').stop().animate({
+                scrollTop: $target.offset().top - 50
+            }, 750);
+        }
+    });
 
 /* Charts*/
     

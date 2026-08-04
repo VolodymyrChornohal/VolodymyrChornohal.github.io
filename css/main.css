@@ -145,7 +145,12 @@ background-color: transparent;
 
 
 #page-experience{
-     padding: 75px 0;
+    padding: 75px 0;
+    background:#fff;
+}
+
+#page-expertise{
+    padding: 75px 0;
     background:#f7f7f7;
 }
 
